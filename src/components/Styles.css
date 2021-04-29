@@ -1,0 +1,17 @@
+.header {
+    color: white;
+    padding: 20px 20px 20px 20px;
+}
+
+.subheader {
+    color: white;
+    padding: 20px 0px 0px 0px;
+}
+
+.inputs {
+    margin: 10px 0px 10px 0px;
+}
+
+.buttons {
+    padding: 10px 0px 10px 0px;
+}
