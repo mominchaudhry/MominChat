@@ -25,7 +25,7 @@ export default function RegisterForm({ setIsRegistered }) {
         axios.post('https://my-new-rest-api.herokuapp.com/api/users/register', {username:usernameRef.current.value, password:passwordRef.current.value}).then(
             res => {
                 console.log(res.data)
-                setUsername(res.data.username)
+                setUsername(res.data.user.username)
                 setInvalidUsername(false)
                 setSuccess(true)
             }
@@ -48,13 +48,13 @@ export default function RegisterForm({ setIsRegistered }) {
             <Form onSubmit={handleSubmit} className="w-100">
                 <Form.Group>
                     <Form.Label className="subheader">Enter your username</Form.Label>
-                    <Form.Control type="text" size="lg" className="inputs" ref={usernameRef} required/>
+                    <Form.Control type="email" size="lg" className="inputs" ref={usernameRef} required/>
                     {invalidUsername && <Alert variant="danger" onClose={() => setInvalidUsername(false)} dismissible>Username is taken</Alert>}
                     <Form.Label className="subheader">Enter your password</Form.Label>
-                    <Form.Control type="text" size="lg" className="inputs" ref={passwordRef} required/>
+                    <Form.Control type="password" size="lg" className="inputs" ref={passwordRef} required/>
                     {invalidPassword && <Alert variant="danger" onClose={() => setInvalidPassword(false)} dismissible>Password must be at least 8 characters long</Alert>}
                     <Form.Label className="subheader">Confirm password</Form.Label>
-                    <Form.Control type="text" size="lg" className="inputs" ref={confirmPassRef} required/>
+                    <Form.Control type="password" size="lg" className="inputs" ref={confirmPassRef} required/>
                     {invalidConfirm && <Alert variant="danger" onClose={() => setInvalidConfirm(false)} dismissible>Passwords must match</Alert>}
                 </Form.Group>
                 <Button type="submit" size="lg" className="mr-3 mt-3">Register</Button>

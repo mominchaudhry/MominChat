@@ -1,7 +1,36 @@
 .background {
-    background-color: #dddddd;
+    background-color: #666666;
+    flex-grow: 1;
 }
 
 .chat-background {
-    background-color: white;
+    background-color: rgb(56, 56, 56);
+}
+
+.chat-item {
+    color: white;
+    background-color: #31464d;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    overflow:hidden;
+}
+
+.friend-item {
+    color: white;
+    background-color: #31464d;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    overflow:hidden;
+}
+
+.chat-item:hover {
+    transition: 0.3s;
+    background-color: #444444;
+    
+}
+
+.message {
+
 }

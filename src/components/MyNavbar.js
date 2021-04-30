@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Tab, Button, Navbar, Nav, Container} from 'react-bootstrap'
+import { Button, Navbar, Nav, Container} from 'react-bootstrap'
+import logo from '../MominChat1.png'
 
 export default function MyNavbar({user, setToken, setUser, activeKey, setActiveKey}) {
 
@@ -9,21 +10,25 @@ export default function MyNavbar({user, setToken, setUser, activeKey, setActiveK
     }
 
     return (
-        <Navbar variant="dark">
-            <h1 className="header">{user.username}</h1>
-            <Container className="justify-content-center">
-                <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
-                    <Nav className="w-50 d-flex justify-content-around">
-                        <Nav.Item>
-                            <Nav.Link eventKey='chat'>Chats</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey='friends'>Friends</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Tab.Container>
-            </Container>
-            <Button onClick={logout} size="lg">Log Out</Button>
+        <Navbar variant="dark" collapseOnSelect expand="lg" >
+            <Navbar.Brand>
+                <img src={logo} width="300vw"/>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <h1 className="header w-50">{user.username}</h1>
+                <Nav className="w-100 d-flex justify-content-around">
+                    <Nav.Item>
+                        <Nav.Link onClick={() => setActiveKey("chat")}>Chats</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link onClick={() => setActiveKey("friends")}>Friends</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                <Nav className="w-50 d-flex justify-content-end">
+                    <Button onClick={logout} size="lg" className="w-50">Log Out</Button>
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
     )
 }
