@@ -22,7 +22,7 @@ export function ContactsProvider({ children }) {
   }
 
   return (
-    <ContactsContext.Provider value={{ contacts, createContact, removeContact }}>
+    <ContactsContext.Provider value={{ contacts, setContacts, createContact, removeContact }}>
       {children}
     </ContactsContext.Provider>
   )

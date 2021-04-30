@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { Button, Navbar, Nav, Container} from 'react-bootstrap'
 import logo from '../MominChat1.png'
+import { useContacts } from '../contexts/ContactsProvider'
+import { useConversations } from '../contexts/ConversationsProvider'
 
 export default function MyNavbar({user, setToken, setUser, activeKey, setActiveKey}) {
+
+    const { setContacts } = useContacts()
+    const { setConversations } = useConversations()
 
     function logout () {
         setToken('')
         setUser({})
+        setContacts([])
+        setConversations([])
     }
 
     return (
