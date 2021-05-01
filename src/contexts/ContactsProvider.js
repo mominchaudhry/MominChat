@@ -10,7 +10,8 @@ export function useContacts() {
 
 export function ContactsProvider({ children }) {
   const [contacts, setContacts] = useLocalStorage('contacts', [])
-  const token = localStorage.getItem('chat-app-token').slice(1,-1)
+  var token = localStorage.getItem('chat-app-token')
+  if (token) token = token.slice(1,-1)
 
   function createContact(id) {
     console.log(token)

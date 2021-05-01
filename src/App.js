@@ -13,7 +13,7 @@ function App() {
 
   const dashboard = (
     <ContactsProvider>
-      <ConversationsProvider>
+      <ConversationsProvider user={user}>
         <Dashboard token={token} setToken={setToken} setUser={setUser} user={user}/>
       </ConversationsProvider>
     </ContactsProvider>

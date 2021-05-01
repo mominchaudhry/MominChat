@@ -4,10 +4,10 @@ import { useContacts } from '../contexts/ContactsProvider'
 import ChatItem from './ChatItem'
 import {useConversations} from '../contexts/ConversationsProvider'
 
-export default function Sidebar({ setOpenChat }) {
+export default function Sidebar({ setOpenChat, openChat }) {
 
     const {contacts} = useContacts()
-    const {Conversations, createConversation} = useConversations()
+    const {conversations, createConversation} = useConversations()
 
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedContactId, setSelectedContactId] = useState('')
@@ -28,8 +28,8 @@ export default function Sidebar({ setOpenChat }) {
     return (
         <div style={{width:'25vw'}} className='d-flex flex-column'>
             <Button size="lg" className="m-3" onClick={() => setModalOpen(true)}>New Chat</Button>
-            {Conversations.map(person => {
-                if (contacts.find(contact => contact.id===person.user.id)) return <ChatItem key={person.user.id} name={person.user.name} setOpenChat={setOpenChat}/>
+            {conversations.map(person => {
+                if (contacts.find(contact => contact.id===person.id)) return <ChatItem key={person.id} id={person.id} setOpenChat={setOpenChat} openChat={openChat}/>
             })}
             <Modal show={modalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>Select Friend To Chat With</Modal.Header>
@@ -37,7 +37,7 @@ export default function Sidebar({ setOpenChat }) {
                     <Form onSubmit={handleSubmit}>
                         {contacts.map(contact => (
                             <Form.Group controlId={contact.id} key={contact.id}>
-                                <Form.Check type="radio" checked={contact.id===selectedContactId} label={contact.name} onChange={() => handleChange(contact.id)} />
+                                <Form.Check type="radio" checked={contact.id===selectedContactId} label={`${contact.firstName} ${contact.lastName}`} onChange={() => handleChange(contact.id)} />
                             </Form.Group>
                         ))}
                         <Button type="submit">Start Chatting!</Button>
