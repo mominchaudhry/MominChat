@@ -19,9 +19,15 @@ function App() {
     </ContactsProvider>
   )
 
+  const login = (
+    <ContactsProvider>
+      <Login setToken={setToken} setUser={setUser}/>
+    </ContactsProvider>
+  )
+
   return (
     <div className="app">
-      {token.length<1 ? <Login setToken={setToken} setUser={setUser}/> : dashboard}
+      {token.length<1 ? login : dashboard}
     </div>
   );
 }

@@ -1,23 +1,30 @@
-import React, { useRef } from 'react'
+import { getSuggestedQuery } from '@testing-library/dom'
+import React, { useRef, useEffect, useState, useReducer } from 'react'
 import { Form, Container, Button, ListGroup } from 'react-bootstrap'
 import { useContacts } from '../contexts/ContactsProvider'
 import FriendItem from './FriendItem'
 import './Styles.css'
+import axios from 'axios'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export default function Friends() {
 
-    const {contacts} = useContacts()
+    var {contacts, createContact} = useContacts()
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const idRef = useRef()
-    const nameRef = useRef()
-    const { createContact } = useContacts()
 
     function handleSubmit(e) {
         e.preventDefault()
-        createContact(idRef.current.value, nameRef.current.value)
+        createContact(idRef.current.value)
         idRef.current.value = ""
-        nameRef.current.value = ""
     }
+
+    useEffect(async () => {
+        contacts = await localStorage.getItem('chat-app-contacts')
+        console.log(contacts)
+        forceUpdate()
+    }, [])
 
     return (
         <div className="chat-background" style={{height:'100vh'}}>
@@ -27,15 +34,13 @@ export default function Friends() {
                     <Form.Group>
                         <Form.Label className="subheader">Enter your freinds ID</Form.Label>
                         <Form.Control type="text" size="lg" className="inputs" ref={idRef} required/>
-                        <Form.Label className="subheader">What would you like to call this friend?</Form.Label>
-                        <Form.Control type="text" size="lg" className="inputs" ref={nameRef} required/>
                     </Form.Group>
                     <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">Add Friend</Button>
                 </Form>
             </Container>
 
-            {contacts.map(person => {
-                return <FriendItem key={person.id} name={person.name} id={person.id}/>
+            {contacts.map(user => {
+                return <FriendItem key={user.id} name={`${user.firstName} ${user.lastName}`} id={user.id}/>
             })}
         </div>
     )

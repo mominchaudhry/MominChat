@@ -2,10 +2,13 @@ import React, { useState, useRef } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import './Styles.css'
+import logo from '../MominChat1.png'
+import { useContacts } from '../contexts/ContactsProvider'
 
 export default function LoginForm({ setIsRegistered, setToken, setUser }) {
     const usernameRef = useRef()
     const passwordRef = useRef()
+    const {setContacts} = useContacts()
 
     const [unsuccess, setUnsuccess] = useState(false)
 
@@ -22,6 +25,8 @@ export default function LoginForm({ setIsRegistered, setToken, setUser }) {
                 console.log(res.data)
                 setToken(res.data.token)
                 setUser(res.data.user)
+                localStorage.setItem('chat-app-contacts', JSON.stringify(res.data.user.friends))
+                setContacts(res.data.user.friends)
             }
         ).catch (err => {
             console.log(err.response.data)
@@ -31,7 +36,8 @@ export default function LoginForm({ setIsRegistered, setToken, setUser }) {
 
     return (
         <Container className="align-items-center d-flex login-container" style={{height:'100vh', flexDirection:'column', justifyContent:'center'}}>
-            <h1 className="header">Sign In</h1>
+            <img src={logo} width="500vw"/>
+            <h1 className="sign-in-header">Sign In</h1>
             <Form onSubmit={handleSubmit} className="w-100">
                 <Form.Group>
                     <Form.Label className="subheader">Enter your username</Form.Label>

@@ -29,7 +29,7 @@ export default function Sidebar({ setOpenChat }) {
         <div style={{width:'25vw'}} className='d-flex flex-column'>
             <Button size="lg" className="m-3" onClick={() => setModalOpen(true)}>New Chat</Button>
             {Conversations.map(person => {
-                return <ChatItem key={person.user.id} name={person.user.name} setOpenChat={setOpenChat}/>
+                if (contacts.find(contact => contact.id===person.user.id)) return <ChatItem key={person.user.id} name={person.user.name} setOpenChat={setOpenChat}/>
             })}
             <Modal show={modalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>Select Friend To Chat With</Modal.Header>

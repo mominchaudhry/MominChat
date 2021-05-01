@@ -4,6 +4,14 @@
     overflow:hidden;
 }
 
+.sign-in-header {
+    color: white;
+    padding: 20px 20px 20px 20px;
+    overflow:hidden;
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
 .subheader {
     color: white;
     padding: 20px 0px 0px 0px;
