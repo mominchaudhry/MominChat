@@ -29,7 +29,6 @@ export default function LoginForm({ setIsRegistered, setToken, setUser }) {
                 setContacts(res.data.user.friends)
             }
         ).catch (err => {
-            console.log(err.response.data)
             setUnsuccess(true)
         })
     }

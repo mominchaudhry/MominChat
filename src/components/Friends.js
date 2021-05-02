@@ -10,7 +10,6 @@ import useLocalStorage from '../hooks/useLocalStorage'
 export default function Friends() {
 
     var {contacts, createContact} = useContacts()
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const idRef = useRef()
 
@@ -23,7 +22,6 @@ export default function Friends() {
     useEffect(async () => {
         contacts = await localStorage.getItem('chat-app-contacts')
         console.log(contacts)
-        forceUpdate()
     }, [])
 
     return (

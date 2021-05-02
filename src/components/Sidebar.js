@@ -16,6 +16,7 @@ export default function Sidebar({ setOpenChat, openChat }) {
 
     function handleSubmit(e) {
         e.preventDefault()
+        console.log(selectedContactId)
         createConversation(selectedContactId)
         closeModal()
 

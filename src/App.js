@@ -5,6 +5,7 @@ import './App.css'
 import useLocalStorage from "./hooks/useLocalStorage"
 import { ContactsProvider } from "./contexts/ContactsProvider"
 import { ConversationsProvider } from "./contexts/ConversationsProvider"
+import { SocketProvider } from "./contexts/SocketProvider"
 
 function App() {
 
@@ -12,11 +13,13 @@ function App() {
   const [user, setUser] = useLocalStorage('user', {})
 
   const dashboard = (
-    <ContactsProvider>
-      <ConversationsProvider user={user}>
-        <Dashboard token={token} setToken={setToken} setUser={setUser} user={user}/>
-      </ConversationsProvider>
-    </ContactsProvider>
+    <SocketProvider id={user._id}>
+      <ContactsProvider>
+        <ConversationsProvider user={user}>
+          <Dashboard token={token} setToken={setToken} setUser={setUser} user={user}/>
+        </ConversationsProvider>
+      </ContactsProvider>
+    </SocketProvider>
   )
 
   const login = (
