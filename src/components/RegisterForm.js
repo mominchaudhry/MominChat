@@ -79,8 +79,8 @@ export default function RegisterForm({ setIsRegistered }) {
                     <Form.Control type="password" size="lg" className="inputs" ref={confirmPassRef} required/>
                     {invalidConfirm && <Alert variant="danger" onClose={() => setInvalidConfirm(false)} dismissible>Passwords must match</Alert>}
                 </Form.Group>
-                <Button type="submit" size="lg" className="mr-3 mt-3">Register</Button>
-                <Button variant="secondary" size="lg" className="ml-3 mt-3" onClick={togglePage}>Already have an account? Sign in</Button>
+                <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">Register</Button>
+                <Button variant="secondary" size="lg" className="ml-3 mt-3 mb-5" onClick={togglePage}>Already have an account? Sign in</Button>
                 {success && <Alert variant="success" className="mt-4" onClose={() => {setSuccess(false); setIsRegistered(true)}} dismissible>Successfully created user "{username}". Please Sign in.</Alert>}
             </Form>
         </Container>
