@@ -36,17 +36,17 @@ export default function LoginForm({ setIsRegistered, setToken, setUser }) {
 
     return (
         <Container className="align-items-center d-flex login-container" style={{height:'100vh', flexDirection:'column', justifyContent:'center'}}>
-            <img src={logo} width="500vw"/>
-            <h1 className="sign-in-header">Sign In</h1>
+            <img src={logo} width="500vw" className="logo"/>
             <Form onSubmit={handleSubmit} className="w-100">
+                <h1 className="sign-in-header text-center">Sign In</h1>
                 <Form.Group>
                     <Form.Label className="subheader">Enter your username</Form.Label>
                     <Form.Control type="email" size="lg" className="inputs" ref={usernameRef} required/>
                     <Form.Label className="subheader">Enter your password</Form.Label>
                     <Form.Control type="password" size="lg" className="inputs" ref={passwordRef} required/>
                 </Form.Group>
-                <Button type="submit" size="lg" className="mr-3 mt-3">Sign in</Button>
-                <Button variant="secondary" size="lg" className="ml-3 mt-3" onClick={togglePage}>Create an account</Button>
+                <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">Sign in</Button>
+                <Button variant="secondary" size="lg" className="ml-3 mt-3 mb-5" onClick={togglePage}>Create an account</Button>
             </Form>
             {unsuccess && <Alert variant="danger" className="mt-4" onClose={() => setUnsuccess(false)} dismissible>Username and/or password is incorrect</Alert>}
         </Container>

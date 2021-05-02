@@ -55,8 +55,8 @@ export default function RegisterForm({ setIsRegistered }) {
     return (
         <Container className="align-items-center d-flex login-container" style={{height:'100vh', flexDirection:'column', justifyContent:'center'}}>
             <img src={logo} width="500vw"/>
-            <h1 className="sign-in-header">Create an Account</h1>
             <Form onSubmit={handleSubmit} className="w-100">
+                <h1 className="sign-in-header text-center">Create an Account</h1>
                 <Form.Group>
                     <Form.Label className="subheader">Enter your First Name*</Form.Label>
                     <Form.Control type="text" size="lg" className="inputs" ref={firstNameRef} required/>
