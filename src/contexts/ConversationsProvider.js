@@ -13,6 +13,7 @@ export function ConversationsProvider({ children, user }) {
   const [conversations, setConversations] = useLocalStorage('conversations', [])
   const {contacts} = useContacts()
   const socket = useSocket()
+  const [openChat, setOpenChat] = useLocalStorage('openChat', '')
 
   function createConversation(id) {
     if (!conversations.find(c => c.id===id)) {
@@ -50,6 +51,12 @@ export function ConversationsProvider({ children, user }) {
     socket.on('receive-message', addMessageToConversation)
     return () => socket.off('receive-message')
   }, [socket, addMessageToConversation])
+
+  useEffect(() => {
+    const ids = contacts.map(c => c.id)
+    setConversations(conversations.filter(c => ids.includes(c.id)))
+    setOpenChat('')
+  }, [contacts])
 
   function sendMessage(id, text) {
     socket.emit('send-message', {sendTo:id, text})

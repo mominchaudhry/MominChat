@@ -4,15 +4,16 @@ import logo from '../MominChat1.png'
 import useLocalStorage from '../hooks/useLocalStorage'
 import {useContacts} from '../contexts/ContactsProvider'
 
-export default function MyNavbar({user, setToken, setUser, activeKey, setActiveKey}) {
+export default function MyNavbar({user, setToken, setUser, activeKey, setContacts, setConversations, setOpenChat, setActiveKey}) {
 
     const [expanded, setExpanded] = useState(false);
 
     function logout () {
         setToken('')
         setUser({})
-        localStorage.setItem('chat-app-contacts', "[]")
-        localStorage.setItem('chat-app-Conversations', "[]")
+        setContacts([])
+        setConversations([])
+        setOpenChat("")
     }
 
     const click = () => {
@@ -26,7 +27,7 @@ export default function MyNavbar({user, setToken, setUser, activeKey, setActiveK
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>
             <Navbar.Collapse id="responsive-navbar-nav">
-                <h1 className="header w-50">{user._id}</h1>
+                <h1 className="header w-50">{user.username}</h1>
                 <Nav className="w-100 d-flex justify-content-around">
                     <Nav.Item>
                         <Nav.Link onClick={() => {setActiveKey("chat"); setExpanded(false)}}>Chats</Nav.Link>

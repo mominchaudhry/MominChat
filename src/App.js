@@ -1,6 +1,5 @@
 import Login from "./components/Login"
 import Dashboard from "./components/Dashboard"
-import {useState} from 'react'
 import './App.css'
 import useLocalStorage from "./hooks/useLocalStorage"
 import { ContactsProvider } from "./contexts/ContactsProvider"
@@ -11,12 +10,15 @@ function App() {
 
   const [token, setToken] = useLocalStorage('token','')
   const [user, setUser] = useLocalStorage('user', {})
+  const [contacts, setContacts] = useLocalStorage('contacts', [])
+  const [conversations, setConversations] = useLocalStorage('conversations', [])
+  const [openChat, setOpenChat] = useLocalStorage('openChat', "")
 
   const dashboard = (
     <SocketProvider id={user._id}>
       <ContactsProvider>
         <ConversationsProvider user={user}>
-          <Dashboard token={token} setToken={setToken} setUser={setUser} user={user}/>
+          <Dashboard token={token} setToken={setToken} setUser={setUser} setContacts={setContacts} setConversations={setConversations} setOpenChat={setOpenChat} user={user}/>
         </ConversationsProvider>
       </ContactsProvider>
     </SocketProvider>

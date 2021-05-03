@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import { Tab, Button, Nav, Container, Modal, Form} from 'react-bootstrap'
-import { useContacts } from '../contexts/ContactsProvider'
+import React, { useState, useEffect } from 'react'
+import { Button, Modal, Form} from 'react-bootstrap'
 import ChatItem from './ChatItem'
 import {useConversations} from '../contexts/ConversationsProvider'
 
 export default function Sidebar({ setOpenChat, openChat }) {
 
-    const {contacts} = useContacts()
+    const [contacts, setContacts] = useState([])
     const {conversations, createConversation} = useConversations()
 
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedContactId, setSelectedContactId] = useState('')
+    const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
     function closeModal() { setModalOpen(false) }
 
@@ -26,11 +26,24 @@ export default function Sidebar({ setOpenChat, openChat }) {
         setSelectedContactId(selectedid)
     }
 
+    function exitChat() {
+        setOpenChat("")
+    }
+
+    useEffect(() => {
+        async function fetchContacts() {
+            await wait(100)
+            const c = await localStorage.getItem('chat-app-contacts')
+            setContacts(JSON.parse(c))
+        }
+        fetchContacts()
+    }, [])
+
     return (
         <div style={{width:'25vw'}} className='d-flex flex-column'>
             <Button size="lg" className="m-3" onClick={() => setModalOpen(true)}>New Chat</Button>
             {conversations.map(person => {
-                if (contacts.find(contact => contact.id===person.id)) return <ChatItem key={person.id} id={person.id} setOpenChat={setOpenChat} openChat={openChat}/>
+                return <ChatItem key={person.id} id={person.id} setOpenChat={setOpenChat} openChat={openChat}/>
             })}
             <Modal show={modalOpen} onHide={closeModal}>
                 <Modal.Header closeButton>Select Friend To Chat With</Modal.Header>
