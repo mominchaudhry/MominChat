@@ -30,10 +30,10 @@ export default function MyNavbar({user, setToken, setUser, activeKey, setContact
                 <h1 className="header w-50">{user.username}</h1>
                 <Nav className="w-100 d-flex justify-content-around">
                     <Nav.Item>
-                        <Nav.Link onClick={() => {setActiveKey("chat"); setExpanded(false)}}>Chats</Nav.Link>
+                        <Nav.Link onClick={() => {setActiveKey("chat"); setExpanded(false)}}><h4>Chats</h4></Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link onClick={() => {setActiveKey("friends"); setExpanded(false)}}>Friends</Nav.Link>
+                        <Nav.Link onClick={() => {setActiveKey("friends"); setExpanded(false)}}><h4>Friends</h4></Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <Nav className="w-50 d-flex justify-content-end">

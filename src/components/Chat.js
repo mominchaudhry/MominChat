@@ -21,13 +21,14 @@ export default function Chat() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        if (openChat) {
+            await sendMessage(openChat, text)
+            setText('')
+            conversations = await localStorage.getItem('chat-app-conversations')
+            conversations = JSON.parse(conversations)
 
-        await sendMessage(openChat, text)
-        setText('')
-        conversations = await localStorage.getItem('chat-app-conversations')
-        conversations = JSON.parse(conversations)
-
-        setSelectedConvo(conversations.find(c => {return c.id===openChat}))
+            setSelectedConvo(conversations.find(c => {return c.id===openChat}))
+        }
     }
 
     useEffect(() => {

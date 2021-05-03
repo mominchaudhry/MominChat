@@ -38,6 +38,10 @@
     overflow:auto;
 }
 
+.logo-container {
+    text-align: center;
+}
+
 @media screen and (min-width: 769px) {
     .header {
         font-size: 24px;

@@ -19,9 +19,11 @@ export default function RegisterForm({ setIsRegistered }) {
     const [success, setSuccess] = useState(false)
 
     const [username, setUsername] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
+        setLoading(true)
         if (passwordRef.current.value.length <8) return setInvalidPassword(true); else setInvalidPassword(false)
         if (passwordRef.current.value !== confirmPassRef.current.value) return setInvalidConfirm(true); else setInvalidConfirm(false)
         setInvalidUsername(false)
@@ -34,6 +36,7 @@ export default function RegisterForm({ setIsRegistered }) {
         }
         axios.post('https://my-new-rest-api.herokuapp.com/api/users/register', newUser).then(
             res => {
+                setLoading(false)
                 console.log(res.data)
                 setUsername(res.data.user.username)
                 setInvalidUsername(false)
@@ -54,8 +57,10 @@ export default function RegisterForm({ setIsRegistered }) {
 
     return (
         <Container className="align-items-center d-flex login-container" style={{height:'100vh', flexDirection:'column', justifyContent:'center'}}>
-            <img src={logo} width="500vw"/>
-            <Form onSubmit={handleSubmit} className="w-100">
+            <Form onSubmit={handleSubmit} className="w-100 h-100">
+                <div className="logo-container w-100">
+                    <img src={logo} className="logo" width="500vw"/>
+                </div>
                 <h1 className="sign-in-header text-center">Create an Account</h1>
                 <Form.Group>
                     <Form.Label className="subheader">Enter your First Name*</Form.Label>
@@ -79,7 +84,7 @@ export default function RegisterForm({ setIsRegistered }) {
                     <Form.Control type="password" size="lg" className="inputs" ref={confirmPassRef} required/>
                     {invalidConfirm && <Alert variant="danger" onClose={() => setInvalidConfirm(false)} dismissible>Passwords must match</Alert>}
                 </Form.Group>
-                <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">Register</Button>
+                <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">{loading ? 'Loading...' : 'Register'}</Button>
                 <Button variant="secondary" size="lg" className="ml-3 mt-3 mb-5" onClick={togglePage}>Sign in</Button>
                 {success && <Alert variant="success" className="mt-4" onClose={() => {setSuccess(false); setIsRegistered(true)}} dismissible>Successfully created user "{username}". Please Sign in.</Alert>}
             </Form>
