@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form} from 'react-bootstrap'
 import ChatItem from './ChatItem'
 import {useConversations} from '../contexts/ConversationsProvider'
+import './Styles.css'
 
 export default function Sidebar({ setOpenChat, openChat }) {
 
@@ -40,8 +41,8 @@ export default function Sidebar({ setOpenChat, openChat }) {
     }, [])
 
     return (
-        <div style={{width:'25vw'}} className='d-flex flex-column'>
-            <Button size="lg" className="m-3" onClick={() => setModalOpen(true)}>New Chat</Button>
+        <div style={{width:'25vw', minWidth:'150px'}} className='d-flex flex-column'>
+            <Button size="lg" className="m-3 new-chat" onClick={() => setModalOpen(true)}>New Chat</Button>
             {conversations.map(person => {
                 return <ChatItem key={person.id} id={person.id} setOpenChat={setOpenChat} openChat={openChat}/>
             })}

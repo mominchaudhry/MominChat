@@ -25,8 +25,13 @@
     padding: 10px 0px 10px 0px;
 }
 
+.new-chat {
+    min-width: 100px;
+}
+
 .logo {
     width: 50vw;
+    max-width: 500px;
 }
 
 .login-container {

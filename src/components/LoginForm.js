@@ -39,9 +39,9 @@ export default function LoginForm({ setIsRegistered, setToken, setUser }) {
             <Form onSubmit={handleSubmit} className="w-100">
                 <h1 className="sign-in-header text-center">Sign In</h1>
                 <Form.Group>
-                    <Form.Label className="subheader">Enter your username</Form.Label>
+                    <Form.Label className="subheader">Enter your Email</Form.Label>
                     <Form.Control type="email" size="lg" className="inputs" ref={usernameRef} required/>
-                    <Form.Label className="subheader">Enter your password</Form.Label>
+                    <Form.Label className="subheader">Enter your Password</Form.Label>
                     <Form.Control type="password" size="lg" className="inputs" ref={passwordRef} required/>
                 </Form.Group>
                 <Button type="submit" size="lg" className="mr-3 mt-3 mb-5">Sign in</Button>
